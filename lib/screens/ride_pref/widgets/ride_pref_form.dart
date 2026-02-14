@@ -3,6 +3,7 @@ import 'package:blablacar/theme/theme.dart';
 import 'package:blablacar/utils/date_time_util.dart';
 import 'package:blablacar/widgets/actions/bla_button.dart';
 import 'package:blablacar/widgets/display/bla_divider.dart';
+import 'package:blablacar/widgets/inputs/bla_location_picker.dart';
 import 'package:flutter/material.dart';
 import '../../../model/ride/locations.dart';
 import '../../../model/ride_pref/ride_pref.dart';
@@ -56,7 +57,19 @@ class _RidePrefFormState extends State<RidePrefForm> {
   // ----------------------------------
   // Handle events
   // ----------------------------------
-  void onDeparturePressed() {}
+  void onDeparturePressed() async {
+    Location? selectedLocation = await Navigator.of(context).push<Location>(
+      MaterialPageRoute(
+        builder: (_) => BlaLocationPicker(initLocation: departure),
+      ),
+    );
+
+    if (selectedLocation != null) {
+      setState(() {
+        departure = selectedLocation;
+      });
+    }
+  }
 
   void onSwappingLocationPressed() {
     setState(() {
