@@ -17,4 +17,6 @@ class User {
       required this.phone,
       required this.profilePicture,
       required this.verifiedProfile});
+
+  get onPrefSelected => null;
 }
